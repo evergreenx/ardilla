@@ -2,17 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.cdnfonts.com/css/clash-display");
+@import url("https://fonts.cdnfonts.com/css/clash-display?styles=106288,106285,106286,106287,106289,106284");
 
 body {
   font-family: "Clash Display", sans-serif;
 }
 
 .landingPageNav {
-  background-image: url("../assets/svg/navback.svg");
+  /* background-image: url("../assets/svg/navback.svg"); */
 }
 
 .landing__hero {
   background-image: url("../assets/svg/back.svg");
-  background-repeat: no-repeat;
+  background-repeat: no-repeat, no-repeat;
+  /* background-position: center bottom , right bottom; */
+}
+
+/* mobile  */
+
+@media screen and (max-width: 768px) {
+  .landing__hero {
+    /* background-image: url("../assets/svg/backmobile.svg"); */
+
+  }
 }
