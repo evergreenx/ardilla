@@ -26,13 +26,17 @@ const index = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
   };
   const buttonVariants = {
-    hidden: { opacity: 0, x: 100 },
+    hidden: { opacity: 0, x: 10 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
   };
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, delay: 0.5 } }
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, delay: 0.5 },
+    },
   };
 
   return (
@@ -110,11 +114,16 @@ const index = () => {
         up with your email address.
       </motion.p>
 
-      <motion.div className="access_more bg-[#fff] h-[65px] w-full lg:w-[509px] mx-auto rounded-[100px] flex items-center justify-between p-3">
+      <motion.div
+        variants={inputcontainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="access_more bg-[#fff] h-[65px] w-full lg:w-[509px] mx-auto rounded-[100px] flex items-center justify-between p-3"
+      >
         <motion.input
-          variants={inputVariants}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0 }}
+          transition={{ duration: 0.2, delay: 0.5 }}
+          animate={{ opacity: 1 }}
           type="text"
           placeholder="Enter your email address"
           className=" h-[65px] rounded-[100px] text-[#000] font-normal text-sm pl-[20px] outline-none"
@@ -144,10 +153,11 @@ const index = () => {
         </motion.button>
       </motion.div>
 
-      <motion.div className="hero__image right-0 absolute lg:top-[283.21px] top-[67%] "
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
+      <motion.div
+        className="hero__image right-0 lg:absolute flex -mr-3 justify-end lg:top-[283.21px] top-[67%] "
+        variants={imageVariants}
+        initial="hidden"
+        animate="visible"
       >
         <Image
           src={rightHeroImage}
