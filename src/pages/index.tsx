@@ -2,17 +2,65 @@ import React from "react";
 import { Header } from "../components";
 import { rightHeroImage } from "../assets";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const index = () => {
+  // Framer motion variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.5 } },
+  };
+
+  const inputcontainerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.5 } },
+  };
+
+  const slashVariants = {
+    hidden: { pathLength: 0 },
+    visible: { pathLength: 1, transition: { duration: 1, ease: "easeInOut" } },
+  };
+
+  const inputVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
+  };
+  const buttonVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.5 } },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, delay: 0.5 } }
+  };
+
   return (
-    <section className="landing__hero h-[1000px]  bg-cover flex  flex-col w-full p-3 ">
+    <motion.section
+      className="landing__hero h-[1000px]  bg-cover flex  flex-col w-full p-3 "
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <Header />
 
-      <h1 className="text-[#fff]  text-[57px] lg:text-[100px] font-bold text-center tracking-tighter leading-tight">
+      <motion.h1
+        className="text-[#fff]  text-[57px] lg:text-[100px] font-bold text-center tracking-tighter leading-tight"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
         Your portal
         <br />
-        to {"  "} more
-      </h1>
+        to {"  "}{" "}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          more
+        </motion.span>
+      </motion.h1>
 
       <div className="slash__container flex justify-center -m-3   ">
         <svg
@@ -23,11 +71,12 @@ const index = () => {
           className="hidden lg:block"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
+          <motion.path
             d="M2 34C51.7161 14.0216 177.119 -17.1905 281 17.7881"
             stroke="#FDE047"
-            stroke-width="4"
-            stroke-linecap="round"
+            strokeWidth="4"
+            strokeLinecap="round"
+            variants={slashVariants}
           />
         </svg>
 
@@ -39,29 +88,45 @@ const index = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="lg:hidden"
         >
-          <path
+          <motion.path
             d="M1.58594 19.8699C29.9978 8.45267 101.663 -9.38448 161.029 10.6051"
             stroke="#FDE047"
             stroke-width="2.28593"
             stroke-linecap="round"
+            variants={slashVariants}
           />
         </svg>
       </div>
 
-      <p className="font-medium text-sm text-center text-landingParagraph lg:mt-[54px] mt-[50px]  lg:mb-[74px] mb-[47px]  w-full lg:w-[540px] tracking-tight  mx-auto">
+      <motion.p
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
+        className="font-medium text-sm text-center text-landingParagraph lg:mt-[54px] mt-[50px]  lg:mb-[74px] mb-[47px]  w-full lg:w-[540px] tracking-tight  mx-auto"
+      >
         Wealth building is possible. You just need the right partner. With
         better financial tools, Ardilla has made it so much easier for you to
         start building wealth. Take advantage of the Ardilla platform by signing
         up with your email address.
-      </p>
+      </motion.p>
 
-      <div className="access_more bg-[#fff] h-[65px] w-full lg:w-[509px] mx-auto rounded-[100px] flex items-center justify-between p-3">
-        <input
+      <motion.div className="access_more bg-[#fff] h-[65px] w-full lg:w-[509px] mx-auto rounded-[100px] flex items-center justify-between p-3">
+        <motion.input
+          variants={inputVariants}
+          initial="hidden"
+          animate="visible"
           type="text"
           placeholder="Enter your email address"
           className=" h-[65px] rounded-[100px] text-[#000] font-normal text-sm pl-[20px] outline-none"
         />
-        <button className="bg-[#8807F7] hover:bg-[#8707f7e6] text-[#fff] text-center justify-center  font-semibold text-sm rounded-[100px] w-[176px] h-[55px] flex items-center">
+        <motion.button
+          variants={buttonVariants}
+          initial="hidden"
+          animate="visible"
+          className="bg-[#8807F7] hover:bg-[#8707f7e6] text-[#fff] text-center justify-center  
+        
+        font-semibold text-sm rounded-[100px] w-[176px] h-[55px] flex items-center"
+        >
           Access more{" "}
           <svg
             width="16"
@@ -76,17 +141,21 @@ const index = () => {
               fill="white"
             />
           </svg>
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
 
-      <div className="hero__image right-0 absolute lg:top-[283.21px] top-[67%] ">
+      <motion.div className="hero__image right-0 absolute lg:top-[283.21px] top-[67%] "
+          variants={imageVariants}
+          initial="hidden"
+          animate="visible"
+      >
         <Image
           src={rightHeroImage}
           alt="hero"
           className="lg:w-full w-[170px]"
         />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 };
 
